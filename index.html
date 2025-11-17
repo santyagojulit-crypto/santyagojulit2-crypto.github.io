@@ -100,8 +100,17 @@
 </head>
 <body class="bg-[#2e4053]">
 
-    <!-- Contenedor principal del juego -->
-    <div id="game-container" class="w-full max-w-4xl mx-auto p-4 md:p-8 rounded-lg bg-[#34495e] shadow-2xl">
+    <!-- Pantalla de Inicio (NUEVO) -->
+    <div id="start-screen" class="w-full max-w-4xl mx-auto p-8 rounded-lg bg-[#34495e] shadow-2xl text-center">
+        <h1 class="text-4xl font-bold mb-4">Juego de Racionalización</h1>
+        <p class="text-xl mb-8">¡Demuestra tu habilidad racionalizando denominadores!</p>
+        <button id="start-btn" class="restart-btn">
+            Empezar a Jugar
+        </button>
+    </div>
+
+    <!-- Contenedor principal del juego (Añadimos 'hidden' para que inicie oculto) -->
+    <div id="game-container" class="hidden w-full max-w-4xl mx-auto p-4 md:p-8 rounded-lg bg-[#34495e] shadow-2xl">
 
         <!-- 1. HUD (Score, Timer, Vidas) -->
         <div id="hud" class="flex justify-between items-center mb-6 text-xl md:text-2xl font-bold">
@@ -177,6 +186,9 @@
         let isAcceptingAnswers = false;
 
         // 4. Referencias a los nodos UI
+        const startScreen = document.getElementById('start-screen'); // NUEVO
+        const startBtn = document.getElementById('start-btn'); // NUEVO
+        
         const gameContainer = document.getElementById('game-container');
         const gameOverScreen = document.getElementById('game-over-screen');
         
@@ -206,6 +218,7 @@
             isAcceptingAnswers = false;
 
             // 2. Mostrar/Ocultar pantallas
+            startScreen.classList.add('hidden'); // NUEVO
             gameContainer.classList.remove('hidden');
             gameOverScreen.classList.add('hidden');
             
@@ -350,7 +363,10 @@
         // --- Conectar Eventos ---
 
         // Iniciar el juego cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', startGame);
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ya no iniciamos el juego, solo conectamos el botón de inicio
+            startBtn.addEventListener('click', startGame);
+        });
 
         // Conectar los botones de opción
         botones_opcion.forEach(btn => {
