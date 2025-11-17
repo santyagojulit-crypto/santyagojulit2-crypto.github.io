@@ -362,11 +362,8 @@
 
         // --- Conectar Eventos ---
 
-        // Iniciar el juego cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', () => {
-            // Ya no iniciamos el juego, solo conectamos el botón de inicio
-            startBtn.addEventListener('click', startGame);
-        });
+        // Conectamos los botones (el DOM ya está listo porque el script está al final)
+        startBtn.addEventListener('click', startGame);
 
         // Conectar los botones de opción
         botones_opcion.forEach(btn => {
